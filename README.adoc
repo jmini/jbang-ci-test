@@ -1,0 +1,17 @@
+== jbang-ci-test
+
+Test project to run a Jbang script xref:HelloWorld.java[`HelloWorld.java`] inside a GitLab CI pipeline.
+
+Locally the script can be executed with:
+
+[source]
+----
+./jbang run HelloWorld.java
+----
+
+In GitLab CI, the build and the execute jobs are separated and allow to compile (always) or to execute (manual trigger) the script.
+
+Chache folders (`JBANG_CACHE_DIR` and `JBANG_REPO`) are explicitly set up in order to be cached by GitLab.
+
+The variable `JBANG_OPTS` can be modified in order to add options.
+Setting the value to `--verbose` allows to get more output from Jbang.

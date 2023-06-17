@@ -1,0 +1,29 @@
+image: eclipse-temurin:17
+
+variables:
+  # set to "--verbose" to get more insights about what jbang is doing
+  JBANG_OPTS: ""
+  # specify cache directory explicitly in order to cache its content
+  JBANG_CACHE_DIR: jbang-cache/
+  JBANG_REPO: jbang-repo/
+
+cache:
+  paths:
+    - jbang-repo/
+    - jbang-cache/
+
+build:
+  stage: build
+  script:
+    - java --version
+    - ./jbang $JBANG_OPTS build HelloWorld.java
+    - ./jbang info tools HelloWorld.java
+
+execute:
+  stage: deploy
+  script:
+    - ./jbang $JBANG_OPTS run HelloWorld.java
+    - ./jbang info tools HelloWorld.java
+  only:
+    - main
+  when: manual
